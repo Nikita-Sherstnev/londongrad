@@ -1,7 +1,6 @@
 import codecs
 
-from setuptools import Extension, setup
-from Cython.Build import cythonize
+from setuptools import setup
 
 name = 'londongrad'
 
@@ -12,13 +11,8 @@ packages = [
     'londongrad'
 ]
 
-extensions = [
-    Extension("*", [f"{name}/*.pyx"]),
-]
-
 install_requires = [
-    'numpy>=1.23.2',
-    'Cython>=0.29.32'
+    'numpy>=1.23.2'
 ]
 
 tests_require = [
@@ -36,7 +30,6 @@ setup(
     long_description=readme,
     package_dir={'londongrad': 'londongrad'},
     packages=packages,
-    ext_modules = cythonize(extensions, language_level = "3"),
     install_requires=install_requires,
     tests_require=tests_require,
     zip_safe=True,
@@ -47,9 +40,7 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
