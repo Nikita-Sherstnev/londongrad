@@ -31,16 +31,18 @@ class TestFunction:
         assert np.allclose(x.grad, num_grad)
 
     def test_add_forward(self):
-        x = lg.tensor(np.array(2.0))
-        y = F.square(x)
+        x0 = lg.tensor(np.array(2.0))
+        x1 = lg.tensor(np.array(2.0))
+        y = F.add(x0, x1)
         expected = np.array(4.0)
         
         assert y.data == expected
 
     def test_add_backward(self):
-        x = lg.tensor(np.array(3.0))
-        y = F.square(x)
+        x0 = lg.tensor(np.array(2.0))
+        x1 = lg.tensor(np.array(2.0))
+        y = F.add(x0, x1)
         y.backward()
-        expected = np.array(6.0)
+        expected = np.array(1.0) # represents upstream grad which is 1.0 in this case
 
-        assert x.grad == expected
+        assert x0.grad == expected

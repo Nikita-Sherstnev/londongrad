@@ -17,7 +17,7 @@ install_requires = [
 
 tests_require = [
     'coverage>=6.4.3',
-    'flake8>=5.0.4',
+    'pylint>=5.0.4',
     'pytest>=7.1.2'
 ]
 
