@@ -35,7 +35,7 @@ class TestFunction:
         x1 = lg.tensor(np.array(2.0))
         y = F.add(x0, x1)
         expected = np.array(4.0)
-        
+
         assert y.data == expected
 
     def test_add_backward(self):

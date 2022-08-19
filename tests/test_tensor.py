@@ -1,5 +1,3 @@
-import time
-
 import numpy as np
 
 import londongrad as lg
@@ -14,7 +12,7 @@ class TestTensor:
 
         t = lg.tensor(lst)
         t2 = lg.tensor(lst2)
-        assert np.all(t.data) == np.all(np.array(lst))
+        assert np.all(t.data) == np.all(t2.data)
 
     def test_multiply_tensors(self):
         t1 = lg.tensor([1,2,3])
