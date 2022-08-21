@@ -13,12 +13,6 @@ class Tensor:
         self.creator = None
         self.generation = 0
 
-    def __eq__(self, other):
-        if isinstance(other, Tensor):
-            return self.data == other.data
-        else:
-            return self.data == other
-
     @property
     def shape(self):
         return self.data.shape

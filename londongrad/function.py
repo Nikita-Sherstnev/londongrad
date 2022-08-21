@@ -32,6 +32,12 @@ class Function:
         self.outputs = [weakref.ref(output) for output in outputs]
         return outputs if len(outputs) > 1 else outputs[0]
 
+    def __repr__(self):
+        """
+        For printing in graph.
+        """
+        raise NotImplementedError()
+
     def forward(self, *x):
         raise NotImplementedError()
 
@@ -40,6 +46,9 @@ class Function:
 
 
 class Mul(Function):
+    def __repr__(self):
+        return '*'
+
     def forward(self, x0, x1):
         y = x0 * x1
         return y
@@ -58,6 +67,9 @@ class Pow(Function):
     def __init__(self, c):
         self.c = c
 
+    def __repr__(self):
+        return f'**{self.c}'
+
     def forward(self, x):
         y = x ** self.c
         return y
@@ -73,6 +85,9 @@ def pow(x, c):
 
 
 class Add(Function):
+    def __repr__(self):
+        return '+'
+
     def forward(self, x0, x1):
         y = x0 + x1
         return y

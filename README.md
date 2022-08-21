@@ -11,3 +11,11 @@ Run to keep it clean.
 ```
 find . -name "*.py" -not -path "./venv/*" | xargs -i pylint --rcfile setup.cfg {} 
 ```
+
+### Pytest
+
+Run to keep it correct.
+
+```
+python -m pytest -s tests
+```

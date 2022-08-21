@@ -1,7 +1,6 @@
 import numpy as np
 
 import londongrad as lg
-from londongrad import function as F
 
 from conftest import numerical_diff
 
@@ -20,7 +19,7 @@ class TestFunction:
         y.backward()
         expected = np.array(6.0)
 
-        assert x.grad == expected
+        assert x.grad.data == expected
 
     def test_square_gradient_check(self):
         x = lg.tensor(np.random.rand(1))
@@ -46,7 +45,7 @@ class TestFunction:
         y.backward()
         expected = np.array(1.0) # represents upstream grad which is 1.0 in this case
 
-        assert x0.grad == expected
+        assert x0.grad.data == expected
 
     def test_add_square_backward(self):
         x = lg.tensor(np.array(2.0), name='Base')
@@ -55,4 +54,4 @@ class TestFunction:
         y.backward()
 
         assert y.data == 32.0
-        assert x.grad == 64.0
+        assert x.grad.data == 64.0
