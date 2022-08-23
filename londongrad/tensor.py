@@ -50,7 +50,10 @@ class Tensor:
             if f not in seen_set:
                 funcs.append(f)
                 seen_set.add(f)
-                funcs.sort(key=lambda x: x.generation)
+                try:
+                    funcs.sort(key=lambda x: x.generation)
+                except:
+                    raise Exception('Grad is not retained.')
 
         add_func(self.creator)
         

@@ -2,6 +2,7 @@ import weakref
 import numpy as np
 
 from .tensor import Tensor
+from .config import Config
 
 
 def as_array(x):
@@ -24,12 +25,15 @@ class Function:
         if not isinstance(ys, tuple):
             ys = (ys,)
 
-        self.generation = max([x.generation for x in inputs])
         outputs = [Tensor(as_array(y)) for y in ys]
-        for output in outputs:
-            output.set_creator(self)
-        self.inputs = inputs
-        self.outputs = [weakref.ref(output) for output in outputs]
+        
+        if Config.enable_backprop:
+            self.generation = max([x.generation for x in inputs])
+            for output in outputs:
+                output.set_creator(self)
+            self.inputs = inputs
+            self.outputs = [weakref.ref(output) for output in outputs]
+
         return outputs if len(outputs) > 1 else outputs[0]
 
     def __repr__(self):

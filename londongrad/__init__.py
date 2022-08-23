@@ -3,4 +3,6 @@ from .tensor_factories import (
     tensor
 )
 
+from .config import no_grad
+
 init_tensor_operations()

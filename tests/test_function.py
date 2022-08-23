@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 import londongrad as lg
 
@@ -55,3 +56,14 @@ class TestFunction:
 
         assert y.data == 32.0
         assert x.grad.data == 64.0
+
+    def test_square_without_backprop(self):
+        x = lg.tensor([2.0])
+
+        with lg.no_grad():
+            a = x ** 2
+
+            with pytest.raises(Exception) as e_info:
+                a.backward()
+
+            assert e_info.value == 'Grad is not retained.'
