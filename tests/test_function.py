@@ -48,6 +48,24 @@ class TestFunction:
 
         assert x0.grad.data == expected
 
+    def test_mul_forward(self):
+        x0 = lg.tensor(np.array(2.0))
+        x1 = lg.tensor(np.array(2.0))
+        y = x0 * x1
+        expected = np.array(4.0)
+
+        assert y.data == expected
+
+    def test_mul_backward(self):
+        x0 = lg.tensor(np.array(2.0))
+        x1 = lg.tensor(np.array(3.0))
+        y = x0 * x1
+
+        y.backward()
+        
+        assert x0.grad.data == x1.data
+        assert x1.grad.data == x0.data
+
     def test_add_square_backward(self):
         x = lg.tensor(np.array(2.0), name='Base')
         a = x ** 2
@@ -66,4 +84,4 @@ class TestFunction:
             with pytest.raises(Exception) as e_info:
                 a.backward()
 
-            assert e_info.value == 'Grad is not retained.'
+            assert str(e_info.value) == 'Grad is not retained.'
