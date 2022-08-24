@@ -75,6 +75,34 @@ class TestFunction:
         assert y.data == 32.0
         assert x.grad.data == 64.0
 
+    def test_negation(self):
+        x = lg.tensor([2.0])
+        y = -x
+
+        y.backward()
+        assert y.data == -2.0
+        assert x.grad.data == -1.0
+
+    def test_sub(self):
+        x0 = lg.tensor([5.0])
+        x1 = lg.tensor([2.0])
+        y = x0 - x1
+
+        y.backward()
+        assert y.data == 3.0
+        assert x0.grad.data == 1.0
+        assert x1.grad.data == -1.0
+
+    def test_div(self):
+        x0 = lg.tensor([5.0])
+        x1 = lg.tensor([2.0])
+        y = x0 / x1
+
+        y.backward()
+        assert y.data == 2.5
+        assert x0.grad.data == 0.5
+        assert x1.grad.data == -1.25
+
     def test_square_without_backprop(self):
         x = lg.tensor([2.0])
 
