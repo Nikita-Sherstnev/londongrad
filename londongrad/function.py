@@ -119,6 +119,9 @@ def neg(x):
 
 
 class Sub(Function):
+    def __repr__(self):
+        return '-'
+
     def forward(self, x0, x1):
         y = x0 - x1
         return y
@@ -137,6 +140,9 @@ def rsub(x0, x1):
 
 
 class Div(Function):
+    def __repr__(self):
+        return '/'
+
     def forward(self, x0, x1):
         y = x0 / x1
         return y
