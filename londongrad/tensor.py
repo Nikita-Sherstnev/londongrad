@@ -13,6 +13,9 @@ class Tensor:
         self.creator = None
         self.generation = 0
 
+    def cleargrad(self):
+        self.grad = None
+
     @property
     def shape(self):
         return self.data.shape
